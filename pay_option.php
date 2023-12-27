@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $itemData = $_POST['item'];
     $detailsData = $_POST['details'];
     $payData = $_POST['pay'];
-    $mailData = $_POST['mail'];
-    $mobilData = $_POST['mobil'];
+    //$mailData = $_POST['mail'];
+   /// $mobilData = $_POST['mobil'];
 
     //Array Data
     $item_typeData = $_POST["item_type"];
@@ -69,9 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="hidden" name="pay" id="pay" value="<?php echo $payData; ?>" readonly required>
 
         </div>
+        <!--
         <script src="https://js.paystack.co/v1/inline.js"></script>
     <button type="button" onclick="payWithPaystack()"> Pay </button>
-    
+                                                                    -->
         <button type="submit" class="btn btn-flat  bg-gradient-primary mx-2" name="choice">PROCEED <i class="fa fa-angle-double-right"> </i></button>
         <a href="./index.php?page=select_item"><button type="button" class="btn btn-flat  bg-gradient-warning mx-2"><i class="fa fa-angle-double-left"> </i> BACK</button></a>
     </form>
@@ -81,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //PAysatck
 
 function payWithPaystack(){
-    var pay = document.getElementById("pay");
+ /*   var pay = document.getElementById("pay");
     var mobil = document.getElementById("mobil");
     var mail = document.getElementById("mail");
     var payValue = pay.value;
@@ -109,7 +110,8 @@ function payWithPaystack(){
           alert('window closed');
       }
     });
-    handler.openIframe();
+    handler.openIframe(); 
+    */
   }
 
 

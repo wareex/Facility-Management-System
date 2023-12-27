@@ -112,7 +112,7 @@ $rs = $qry->fetch_array();
     <label for="mobile" class="control-label">Your Recharging Details</label>
     <i>Meter No(Elcetricity)/ House No(Waste)/ Smart card No(TV)/ Phone Number(Internet)</i>
     <input type="number" class="form-control form-control-sm" name="details" id="details" value="" required>
-
+    <!---
     <label for="mobile" class="control-label">Your Email Address</label>
     <i>Put in your mail address for confirmation message</i>
     <input type="email" class="form-control form-control-sm" name="mail" id="mail" value="" required>
@@ -120,8 +120,7 @@ $rs = $qry->fetch_array();
     <label for="mobile" class="control-label">Your Mobile number</label>
     <i>Put in your personal mobile number</i>
     <input type="number" class="form-control form-control-sm" name="mobil" id="mobil" value="" required>
-
-
+-->
     <div class=" form-group">
         <label for="mobile" class="control-label">Amount to pay</label>
         <i>Enter the Amount you want to pay</i>
@@ -136,9 +135,7 @@ $rs = $qry->fetch_array();
 
 <!---Script-->
 <script>
-    
- 
-function updateDiv() {
+    function updateDiv() {
         var item = document.getElementById("item");
         var div0 = document.getElementById("div0");
         var div1 = document.getElementById("div1");
