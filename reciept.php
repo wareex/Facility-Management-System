@@ -1,4 +1,14 @@
-<?php include 'db_connect.php' ?>
+<?php include 'db_connect.php';
+
+if (isset($_GET['id'])) {
+    $qry = $conn->query("SELECT * FROM utility_bill where id= " . $_GET['id']);
+    foreach ($qry->fetch_array() as $k => $val) {
+        $$k = $val;
+    }
+}
+
+
+?>
 <style>
     .text-danger strong {
         color: #9f181c;
@@ -139,7 +149,7 @@ $qry = $conn->query("SELECT
 , `utility_bill`.`AmountPayable`
 , `utility_bill`.`AmountPaid`
 , `utility_bill`.`Balance`
-, `utility_bill`.`duration`
+, `utility_bill`.`month`
 , `utility_bill`.`trans_id`
 , FORMAT(`tenants`.`firstname`,`middlename`,`lastname`) AS name
 , DATE_FORMAT(`utility_bill`.`date`, '%D %M, %Y') AS date

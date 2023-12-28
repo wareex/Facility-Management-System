@@ -93,25 +93,22 @@ class Action
 	function pay_bill()
 	{
 		extract($_POST);
-		$data = "";
-		foreach ($_POST as $k => $v) {
-			if (!in_array($k, array('id', 'ref_code')) && !is_numeric($k)) {
-				if (empty($data)) {
-					$data .= " $k='$v' ";
-				} else {
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
+		$data = " item = '$item' ";
+		$data .= ", item_type = '$item_type' ";
+		$data .= ", duration = '$duration' ";
+		$data .= ", details = '$details' ";
+		$data .= ", pay = '$pay' ";
+		$data .= ", trans_id = '$trans_id' ";
+		$data .= ", status = '$status' ";
+		$data .= ", UId = '$UId' ";
+		$data .= ", balance = '$balance' ";
+		
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO utility_bill set $data");
-			$id = $this->db->insert_id;
-		}
-		if ($save) {
+		} 
+		if ($save)
 			return 1;
-		}
 	}
-
 
 	function save_agent()
 	{

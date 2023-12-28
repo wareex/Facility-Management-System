@@ -17,13 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $item_typeData = $_POST["item_type"];
     $durData = $_POST['dur'];
 
-
-    //$proId = $_GET['proId'];
-    $qry = $conn->query("SELECT * FROM utility_bill ");
-    $rs = $qry->fetch_array();
 ?>
     <form action="./index.php?page=make_payment" method="POST">
-        <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="<?php echo $rs['id']; ?>" readonly>
+        <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="" readonly>
         <div class="form-group">
             <label for="paymethode" class="control-label">Payment Method</label>
             <select class="form-control" name="paymethode" id="paymethode">

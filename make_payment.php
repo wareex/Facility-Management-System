@@ -17,16 +17,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		require_once 'vendor/autoload.php';
 
 		if (isset($_POST['choice'])) {
+		
 			if ($_POST['paymethode'] == '1') {
 
 				echo '
 					  <span style="color:green;text-align:center; font-weight: bold;">Youre making payment Via Mobile Money.</span>
 				  <div class="container-fluid">
-					<form action="" id="make_payment" method="POST">
-					  <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="' . isset($_GET['id']) . '" readonly>
+					<form action="./index.php?page=utility_bills" id="make_payment" method="POST">
+					  <input type="hidden" class="form-control form-control-sm" name="id" id="id" value="" readonly>
 					  <input type="hidden" class="form-control form-control-sm" name="UId" id="UId" value="' . $_SESSION['login_UId'] . '" readonly>	
-					  <input type="hidden" class="form-control form-control-sm" name="trans_id" id="trans_id" value="' . 'tr' . $detailsData . $_SESSION['login_UId'] . date('M d, Y h:i A') . '" readonly>	  
+					  <input type="hidden" class="form-control form-control-sm" name="trans_id" id="trans_id" value="' . 'tr' . $detailsData . $_SESSION['login_UId'] . date('M d, Y') . '" readonly>	  
 					  <input type="hidden" class="form-control form-control-sm" name="status" id="status" value="' . '1' . '" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="balance" id="balance" value="" readonly>
+
 
 					  <div class="form-group">
 						<label for="mobile" class="control-label">Mobile Number (Use Correct mobile for SMS receipt.)</label>
@@ -48,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					  
 					  <label for="mobile" class="control-label">Amount to pay</label>
 					  <i>Here is the Amount you want to pay</i>
-					  <input type="number" class="form-control form-control-sm" name="amountpaid" id="pay" value="' . $payData . '" readonly required>
+					  <input type="number" class="form-control form-control-sm" name="pay" id="pay" value="' . $payData . '" readonly required>
 					  </div>
 
 					  <div class="card-footer border-top border-info">
@@ -64,11 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				echo '
 			<span style="color:green;text-align:center; font-weight: bold;">Youre making payment Via Credit Card.</span>
 			<div class="container-fluid">
-			  <form action="" id="make_payment" method="POST">
-				<input type="hidden" class="form-control form-control-sm" name="id" id="id" value="' . isset($_GET['id']) . '" readonly>
-				<input type="hidden" class="form-control form-control-sm" name="User_id" id="clierntId" value="' . $_SESSION['login_UId'] . '" readonly>	
-				<input type="hidden" class="form-control form-control-sm" name="trans_id" id="trans_id" value="' . 'tr' . $detailsData . $_SESSION['login_UId'] . date('M d, Y h:i A') . '" readonly>
+			  <form action="./index.php?page=utility_bills" id="make_payment" method="POST">
+				<input type="hidden" class="form-control form-control-sm" name="id" id="id" value="" readonly>
+				<input type="hidden" class="form-control form-control-sm" name="UId" id="UId" value="' . $_SESSION['login_UId'] . '" readonly>	
+				<input type="hidden" class="form-control form-control-sm" name="trans_id" id="trans_id" value="' . 'tr' . $detailsData . $_SESSION['login_UId'] . date('M d, Y') . '" readonly>
 				<input type="hidden" class="form-control form-control-sm" name="status" id="status" value="' . '1' . '" readonly>
+				<input type="hidden" class="form-control form-control-sm" name="balance" id="balance" value="" readonly>
 
 				<div class="form-group">
 						<label for="mobile" class="control-label">Credit Card Number (Use Correct Credit card for OTP)</label>
@@ -130,56 +134,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			//document.getElementById("CurrentBalance").value = +num1 - num2;
 		}
 
-		$(document).ready(function() {
-			if ('<?php echo isset($id) ? 1 : 0 ?>' == 1)
-				$('#tenant_id').trigger('change')
-		})
-		$('.select2').select2({
-			placeholder: "Please Select Here",
-			width: "100%"
-		})
-		$('#tenant_id').change(function() {
-			if ($(this).val() <= 0)
-				return false;
+		$('#make_payment').submit(function(e) {
+		e.preventDefault()
+		start_load()
+		$('#msg').html('')
+		$.ajax({
+			url: 'ajax.php?action=pay_bill',
+			data: new FormData($(this)[0]),
+			cache: false,
+			contentType: false,
+			processData: false,
+			method: 'POST',
+			type: 'POST',
+			success: function(resp) {
+				if (resp == 1) {
+					alert_toast("Payment made successfully", 'success')
+					setTimeout(function() {
+						location.reload()
+					}, 1500)
+					
+				} location.href="./index.php?page=utility_bills";
 
-			start_load()
-			$.ajax({
-				url: 'ajax.php?action=get_tdetails',
-				method: 'POST',
-				data: {
-					id: $(this).val(),
-					pid: '<?php echo isset($id) ? $id : '' ?>'
-				},
-				success: function(resp) {
-					if (resp) {
-
-					}
-				},
-				complete: function() {
-					end_load()
-				}
-			})
+			}
 		})
-		$('#manage-agent').submit(function(e) {
-			e.preventDefault()
-			start_load()
-			$('#msg').html('')
-			$.ajax({
-				url: 'ajax.php?action=pay_bill',
-				data: new FormData($(this)[0]),
-				cache: false,
-				contentType: false,
-				processData: false,
-				method: 'POST',
-				type: 'POST',
-				success: function(resp) {
-					if (resp == 1) {
-						alert_toast("Payment successful.", 'success')
-						setTimeout(function() {
-							location.reload()
-						}, 1000)
-					}
-				}
-			})
-		})
+	})
 	</script>

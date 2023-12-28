@@ -533,7 +533,7 @@
                   <td class="text-center"><?php echo $ij++ ?></td>
                   <td><?php echo $roww['item'] ?></td>
                   <td><?php echo $roww['item_type'] ?></td>
-                  <td>N <?php echo $roww['amountpaid'] ?></td>
+                  <td>N <?php echo $roww['pay'] ?></td>
                   <td> <?php echo $roww['duration'] ?></td>
                   <td> <?php echo $roww['trans_id'] ?></td>
                   <td>N <?php echo $roww['balance'] ?></td>

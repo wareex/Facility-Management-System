@@ -48,7 +48,7 @@ if ($action == 'delete_user') {
 		echo $save;
 }
 if ($action == 'pay_bill') {
-	$save = $crud->save_user();
+	$save = $crud->pay_bill();
 	if ($save)
 		echo $save;
 }
