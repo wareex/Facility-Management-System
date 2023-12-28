@@ -136,11 +136,13 @@ $qry = $conn->query("SELECT
 , `houses`.`description`
 , `utility_bill`.`item`
 , `utility_bill`.`item_type`
-, `utility_bill`.`AmountPayable`
-, `utility_bill`.`AmountPaid`
-, `utility_bill`.`Balance`
+, `utility_bill`.`amountpayable`
+, `utility_bill`.`pay`
+, `utility_bill`.`balance`
 , `utility_bill`.`duration`
 , `utility_bill`.`trans_id`
+, `utility_bill`.`status`
+, `utility_bill`.`details`
 , FORMAT(`tenants`.`firstname`,`middlename`,`lastname`) AS name
 , DATE_FORMAT(`utility_bill`.`date`, '%D %M, %Y') AS date
 FROM
@@ -179,7 +181,7 @@ $rs = $qry->fetch_array();
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="receipt-left">
-                                    <h1>Payment Receipt</h1>
+                                    <h1><center>Payment Receipt</center></h1>
                                 </div>
                             </div>
                         </div>
@@ -194,13 +196,40 @@ $rs = $qry->fetch_array();
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                            <tr>
                                     <td class="text-right" style="padding-right:20px;">
-                                        <strong>Amount Due: </strong>
+                                        <strong>Utility Item: </strong>
                                     </td>
                                     <td style="text-align:right; padding-right:20px;">
-                                        <strong><i class="fa fa-inr"></i>N
-                                            <?php echo $rs['AmountPayable']; ?></strong>
+                                        <strong><i class="fa fa-inr"></i>
+                                            <?php echo $rs['item']; ?></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="padding-right:20px;">
+                                        <strong>Utility Item Type: </strong>
+                                    </td>
+                                    <td style="text-align:right; padding-right:20px;">
+                                        <strong><i class="fa fa-inr"></i>
+                                            <?php echo $rs['item_type']; ?></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="padding-right:20px;">
+                                        <strong>Payment Duration: </strong>
+                                    </td>
+                                    <td style="text-align:right; padding-right:20px;">
+                                        <strong><i class="fa fa-inr"></i>
+                                            <?php echo $rs['duration']; ?></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="padding-right:20px;">
+                                        <strong>Recipient NO: </strong>
+                                    </td>
+                                    <td style="text-align:right; padding-right:20px;">
+                                        <strong><i class="fa fa-inr"></i>
+                                            <?php echo $rs['details']; ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -209,7 +238,7 @@ $rs = $qry->fetch_array();
                                     </td>
                                     <td style="text-align:right; padding-right:20px;">
                                         <strong><i class="fa fa-inr"></i>N
-                                            <?php echo $rs['AmountPaid']; ?></strong>
+                                            <?php echo $rs['pay']; ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -217,7 +246,7 @@ $rs = $qry->fetch_array();
                                         <strong>Balance Due: </strong>
                                     </td>
                                     <td style="text-align:right; padding-right:20px;">
-                                        <strong><i class="fa fa-inr"></i>N <?php echo $rs['Balance']; ?></strong>
+                                        <strong><i class="fa fa-inr"></i>N <?php echo $rs['balance']; ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -227,7 +256,7 @@ $rs = $qry->fetch_array();
                                     </td>
                                     <td class="text-right text-danger" style="padding-right:20px;">
                                         <strong><i class="fa fa-inr"></i>N
-                                            <?php echo $rs['AmountPaid']; ?></strong>
+                                            <?php echo $rs['pay']; ?></strong>
                                     </td>
                                 </tr>
                             </tbody>
@@ -240,7 +269,7 @@ $rs = $qry->fetch_array();
                             <center>&copy;2023, SAM NUJOMA FACILITY MANAGEMENT</center>
                         </p>
                         <i>
-                            <center>You can print this receipt and present it as proof od payment. THANK YOU.</center>
+                            <center>You can print this receipt and present it as proof of payment. THANK YOU.</center>
                         </i>
                     </div>
                     <div class="row">
