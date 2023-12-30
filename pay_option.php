@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $itemData = $_POST['item'];
     $detailsData = $_POST['details'];
     $payData = $_POST['pay'];
-    //$mailData = $_POST['mail'];
-   /// $mobilData = $_POST['mobil'];
+    $balanceData = $_POST['balance'];
+    $amountpayableData = $_POST['amountpayableIn'];
 
     //Array Data
     $item_typeData = $_POST["item_type"];
@@ -60,8 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                                                         ?>" readonly required>
             <input type="hidden" name="details" id="details" value="<?php echo $detailsData; ?>" readonly required>
-            <input type="hidden" name="mobil" id="mobil" value="<?php echo $mobilData; ?>" readonly required>
-            <input type="hidden" name="mail" id="mail" value="<?php echo $mailData; ?>" readonly required>
+            <input type="hidden" name="balance" id="balance" value="<?php echo $balanceData; ?>" readonly required>
+            <input type="hidden" name="amountpayable" id="amountpayable" value="<?php echo $amountpayableData; ?>" readonly required>
             <input type="hidden" name="pay" id="pay" value="<?php echo $payData; ?>" readonly required>
 
         </div>

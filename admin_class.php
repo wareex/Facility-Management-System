@@ -102,6 +102,7 @@ class Action
 		$data .= ", status = '$status' ";
 		$data .= ", UId = '$UId' ";
 		$data .= ", balance = '$balance' ";
+		$data .= ", amountpayable = '$amountpayable' ";
 		
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO utility_bill set $data");

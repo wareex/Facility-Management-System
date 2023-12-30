@@ -327,6 +327,7 @@
         </div>
       </div>
     </div>
+
     <!-- Payement History Table -->
     <div class="col-lg-12">
       <div class="card card-outline card-secondary">
@@ -348,13 +349,13 @@
             </thead>
             <tbody>
               <?php
-              $ij = 1;
+              $j = 1;
               $qry2 = $conn->query("SELECT *
 				   FROM utility_bill WHERE utility_bill.UId = '$SessionId' ");
               while ($roww = $qry2->fetch_assoc()) :
               ?>
                 <tr>
-                  <td class="text-center"><?php echo $ij++ ?></td>
+                  <td class="text-center"><?php echo $j++ ?></td>
                   <td><?php echo $roww['item'] ?></td>
                   <td><?php echo $roww['item_type'] ?></td>
                   <td>N <?php echo $roww['pay'] ?></td>
@@ -365,7 +366,7 @@
                   <td class="text-center">
 
                     <div class="btn-group">
-                      <a href="./index.php?page=view_payment&payId=<?php echo $roww['id'] ?>" class="btn btn-primary btn-flat print_payment">RECEIPT
+                      <a href="./index.php?page=view_payment&trans_id=<?php echo $roww['trans_id'] ?>" class="btn btn-primary btn-flat print_payment">RECEIPT
                       </a>
                     </div>
                   </td>
@@ -459,4 +460,5 @@
   // A button that triggers a month change, you can do:
   // $('#changeMonthButton').on('click', updateProgressBar);
      
+  
 </script>

@@ -6,6 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$item_typeData = $_POST['item_type'];
 	$durData = $_POST['duration'];
 	$detailsData = $_POST['details'];
+	$balanceData = $_POST['balance'];
+    $amountpayableData = $_POST['amountpayable'];
+
 	$payData = $_POST['pay'];
 ?>
 
@@ -28,7 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					  <input type="hidden" class="form-control form-control-sm" name="UId" id="UId" value="' . $_SESSION['login_UId'] . '" readonly>	
 					  <input type="hidden" class="form-control form-control-sm" name="trans_id" id="trans_id" value="' . 'tr' . $detailsData . $_SESSION['login_UId'] . date('M d, Y') . '" readonly>	  
 					  <input type="hidden" class="form-control form-control-sm" name="status" id="status" value="' . '1' . '" readonly>
-					  <input type="hidden" class="form-control form-control-sm" name="balance" id="balance" value="" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="balance" id="balance" value="'. $balanceData .'" readonly>
+					  <input type="hidden" class="form-control form-control-sm" name="amountpayable" id="amountpayable" value="'. $amountpayableData .'" readonly>
+
 
 
 					  <div class="form-group">
@@ -72,7 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				<input type="hidden" class="form-control form-control-sm" name="UId" id="UId" value="' . $_SESSION['login_UId'] . '" readonly>	
 				<input type="hidden" class="form-control form-control-sm" name="trans_id" id="trans_id" value="' . 'tr' . $detailsData . $_SESSION['login_UId'] . date('M d, Y') . '" readonly>
 				<input type="hidden" class="form-control form-control-sm" name="status" id="status" value="' . '1' . '" readonly>
-				<input type="hidden" class="form-control form-control-sm" name="balance" id="balance" value="" readonly>
+				<input type="hidden" class="form-control form-control-sm" name="balance" id="balance" value="'. $balanceData .'" readonly>
+				<input type="hidden" class="form-control form-control-sm" name="amountpayable" id="amountpayable" value="'. $amountpayableData .'" readonly>
 
 				<div class="form-group">
 						<label for="mobile" class="control-label">Credit Card Number (Use Correct Credit card for OTP)</label>

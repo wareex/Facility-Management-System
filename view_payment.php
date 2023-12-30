@@ -125,7 +125,8 @@
     }
 </style>
 <?php
-$payId = $_GET['payId'];
+$UserId =$_SESSION['login_UId'];
+$trans_id = $_GET['trans_id'];
 $qry = $conn->query("SELECT
 `tenants`.`firstname`
 , `tenants`.`lastname`
@@ -151,7 +152,7 @@ LEFT JOIN `houses`
     ON (`utility_bill`.`UId` = `houses`.`house_no`)
 LEFT JOIN `tenants` 
     ON (`utility_bill`.`UId` = `tenants`.`house_id`)
- WHERE `utility_bill`.`UId` = '$SessionId' ");
+ WHERE `utility_bill`.`UId` = '$UserId' AND `utility_bill`.`trans_id` = '$trans_id' ");
 $rs = $qry->fetch_array();
 ?>
 <div class="col-lg-12">

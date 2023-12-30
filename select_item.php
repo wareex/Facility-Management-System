@@ -44,12 +44,13 @@ $completedMonths = $_POST['completedMonths'];
             </select>
 
             <label for="mobile" class="control-label">Amount Due (Summation of all month due)</label>
-            <i>Hover your mouse on each month for exact month due</i>
+            <i>Green checked month(s) are due for payment</i>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" name="amountpayableIn" id="amountpayableIn"  value="<?php  echo "N" . $amountpayableIn ?>" readonly >
+                <input type="number" class="form-control" name="amountpayableIn" id="amountpayableIn"  value="<?php echo $amountpayableIn; ?>" readonly>
                 <span class="input-group-text" value="" id="month"><?php echo $completedMonths.'Month(s)';  ?></span>
             </div>
-
+            <label for="mobile" class="control-label">Balance meant to pay</label>
+            <input type="number" class="form-control" name="balance" id="balance"  value="" readonly required>
         </div>
 
         <!---Waste Bill show--->
@@ -129,7 +130,7 @@ $completedMonths = $_POST['completedMonths'];
     <div class=" form-group">
         <label for="mobile" class="control-label">Amount to pay</label>
         <i>Enter the Amount you want to pay</i>
-        <input type="number" class="form-control form-control-sm" name="pay" id="pay" value="updateDiv2()" readonly required>
+        <input type="number" class="form-control form-control-sm" name="pay" id="pay" oninput="updateResult()" value="updateDiv2()" readonly required>
 
     </div>
     <button type="submit" class="btn btn-flat  bg-gradient-primary mx-2" name="step1" onclick="submitForm()"> PROCEED <i class="fa fa-angle-double-right"> </i></button>
@@ -142,7 +143,22 @@ $completedMonths = $_POST['completedMonths'];
 ?>
 <!---Script-->
 <script>
+
+// Function to update the readonly attribute based on the selected optio
+  
     function updateDiv() {
+
+    var selectElement = document.getElementById('item');
+    var textBoxElement = document.getElementById('pay');
+
+    // Check the selected value of the dropdown
+    if (selectElement.value === 'Elcetricity Bill') {
+      textBoxElement.readOnly = false; // Make the text box writable
+    } else {
+      textBoxElement.readOnly = true; // Make the text box readonly
+    }
+
+
         var item = document.getElementById("item");
         var div0 = document.getElementById("div0");
         var div1 = document.getElementById("div1");
@@ -177,7 +193,8 @@ $completedMonths = $_POST['completedMonths'];
             div0.classList.remove("hidden");
         }
     }
-
+// Call the function when the page is loaded to set the initial state
+window.onload = updateTextBox;
     function updateDiv2() {
         var item_type2 = document.getElementById("item_type2");
         var item_type3 = document.getElementById("item_type3");
@@ -324,6 +341,22 @@ $completedMonths = $_POST['completedMonths'];
         } else if (selectedValue4 === "Spectranet" && selectedDur1 === "One-Off Subs") {
             pay.value = OneOffValueD;
         }
-
     }
+
+     // Function to update the result based on POST variable and user input
+  function updateResult() {
+   //balance updateing
+   var postVariable = parseFloat(document.getElementById('amountpayableIn').value) || 0;
+    var userInput = parseFloat(document.getElementById('pay').value) || 0;
+
+    // Perform arithmetic calculation (you can customize this part)
+    var result = postVariable - userInput;
+
+    // Update the result text box
+    document.getElementById('balance').value = result;
+ 
+  }
+
+  // Call the function when the page is loaded to set the initial state
+  window.onload = updateResult;
 </script>
