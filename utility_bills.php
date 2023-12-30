@@ -109,6 +109,9 @@
     }
   }
 </style>
+<!-- Add this to the <head> section of your HTML file -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <!-- Info boxes -->
 <div class="col-12">
@@ -130,8 +133,11 @@
   <div class="card card-outline card-primary">
     <div class="card-header">
       <div class="card-tools">
-        <a href="./index.php?page=select_item" class="btn btn-block btn-sm btn-default btn-flat border-success make_payment">Make Payments
-        </a>
+      <form action="./index.php?page=select_item" method="POST" id="billpage">
+          <input type="hidden" class="form-control form-control-sm" name="amountpayableIn" id="amountpayableIn" value="" readonly>
+          <input type="hidden" class="form-control form-control-sm" name="completedMonths" id="completedMonths" value="" readonly>
+          <button type="submit" class="btn btn-block btn-sm btn-default btn-flat border-success make_payment" name="billpage"> Make Payments <i class="fa fa-angle-double-right"> </i></button>
+                </form>
       </div>
     </div>
     <!-- Monthly Payement progress bar -->
@@ -142,8 +148,8 @@
             <thead>
               <h3>Electricity Monthly Bills</h3>
               <tr>
-                <ol class="progress-track">
-                  <li class="progress-done">
+                <ol class="progress-track" data-total-months="12">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -158,7 +164,7 @@
                     </center>
                   </li>
 
-                  <li class="progress-done progress-current">
+                  <li class="progress-todo" data-value="2000">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -173,7 +179,7 @@
                     </center>
                   </li>
 
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -188,7 +194,7 @@
                     </center>
                   </li>
 
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -202,7 +208,7 @@
                       <span class="progress-text">April</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -216,7 +222,7 @@
                       <span class="progress-text">May</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -230,7 +236,7 @@
                       <span class="progress-text">June</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -244,7 +250,7 @@
                       <span class="progress-text">July</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -258,7 +264,7 @@
                       <span class="progress-text">August</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -272,7 +278,7 @@
                       <span class="progress-text">September</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -286,7 +292,7 @@
                       <span class="progress-text">October</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -300,7 +306,7 @@
                       <span class="progress-text">November</span>
                     </center>
                   </li>
-                  <li class="progress-todo">
+                  <li class="progress-todo"data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -318,188 +324,6 @@
               </tr>
             </thead>
           </table>
-
-          <table class="table tabe-hover table-bordered" id="list">
-            <thead>
-              <h3>Waste Monthly Bills</h3>
-              <tr>
-                <ol class="progress-track">
-                  <li class="progress-done">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">January</span>
-                    </center>
-                  </li>
-
-                  <li class="progress-done progress-current">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">February</span>
-                    </center>
-                  </li>
-
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">March</span>
-                    </center>
-                  </li>
-
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">April</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">May</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">June</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">July</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">August</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">September</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">October</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">November</span>
-                    </center>
-                  </li>
-                  <li class="progress-todo">
-                    <center>
-                      <div class="icon-wrap">
-                        <svg class="icon-state icon-check-mark">
-                          <use xlink:href="#icon-check-mark"></use>
-                        </svg>
-
-                        <svg class="icon-state icon-down-arrow">
-                          <use xlink:href="#icon-down-arrow"></use>
-                        </svg>
-                      </div>
-                      <span class="progress-text">December</span>
-                    </center>
-                  </li>
-                </ol>
-              </tr>
-            </thead>
-          </table>
-
         </div>
       </div>
     </div>
@@ -557,4 +381,82 @@
       $(document).ready(function() {
         $('#list').dataTable();
       })
-    </script>
+
+
+     // Variable to hold indices of completed months
+  var completedMonths = [];
+  //var sumofcompletedMonths = calculateSum(completedMonths);
+
+      function updateProgressBar() {
+    // Get the current date
+    var currentDate = new Date();
+
+    // Get the current month (0-based index)
+    var currentMonth = currentDate.getMonth(); // January is 0, February is 1, ..., December is 11
+
+    // Get all progress-todo elements
+    var todoItems = document.querySelectorAll('.progress-todo');
+
+
+    // Get the total value for the progress bar
+    var totalValue = parseInt(document.querySelector('.progress-track').getAttribute('data-total-months'));
+
+    // Calculate the percentage completed
+    var percentageCompleted = (amountPayable / totalValue) * 100;
+
+    // Iterate through each progress-todo element and update the classes
+    todoItems.forEach(function(item, index) {
+      var monthValue = parseInt(item.getAttribute('data-value'));
+
+      // Calculate the percentage for the current month
+      var percentageMonth = (monthValue / totalValue) * 100;
+
+      // Add the index of the completed month to the array
+      if (!completedMonths.includes(index)) {
+        completedMonths.push(index);
+      }
+    
+      
+      // Add progress-done class to completed months
+      if (completedMonths.includes(index)) {
+        item.classList.remove('progress-todo');
+        item.classList.add('progress-done');
+      }
+      // Add progress-current class to the current month
+      else if (index === currentMonth + 1) {
+        item.classList.remove('progress-todo', 'progress-done');
+        item.classList.add('progress-current');
+      }
+      // Add progress-todo class to future months
+      else {
+        item.classList.remove('progress-done', 'progress-current');
+        item.classList.add('progress-todo');
+      }
+      
+    });
+    
+    //Sum of fugding monthsss
+    var sumofcompletedMonths = completedMonths.length;
+
+    document.getElementById('completedMonths').value = sumofcompletedMonths;
+
+     // Sum up the values of completed months
+     var amountPayable = 0;
+    document.querySelectorAll('.progress-done').forEach(function(item) {
+      amountPayable += parseInt(item.getAttribute('data-value'));
+    });
+
+    // Display the amountPayable in the input box
+    document.getElementById('amountpayableIn').value = amountPayable;
+  }
+
+
+  // Call the updateProgressBar function when the page is loaded
+  $(document).ready(function() {
+    updateProgressBar();
+  });
+
+  // A button that triggers a month change, you can do:
+  // $('#changeMonthButton').on('click', updateProgressBar);
+     
+</script>

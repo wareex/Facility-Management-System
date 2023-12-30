@@ -4,6 +4,11 @@
 <?php
 $qry = $conn->query("SELECT * FROM utility_bill");
 $rs = $qry->fetch_array();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$amountpayableIn = $_POST['amountpayableIn'];
+$completedMonths = $_POST['completedMonths']; 
+}
 ?>
 <style>
     .hidden {
@@ -41,8 +46,8 @@ $rs = $qry->fetch_array();
             <label for="mobile" class="control-label">Amount Due (Summation of all month due)</label>
             <i>Hover your mouse on each month for exact month due</i>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" name="AmountPayable" id="paid" readonly aria-label="Amount Payable" value="" aria-describedby="basic-addon2">
-                <span class="input-group-text" value="<?php echo 2; ?>" id="basic-addon2"><?php echo 2 . ' ' . 'Month(s)'; ?></span>
+                <input type="number" class="form-control" name="amountpayableIn" id="amountpayableIn"  value="<?php  echo "N" . $amountpayableIn ?>" readonly >
+                <span class="input-group-text" value="" id="month"><?php echo $completedMonths.'Month(s)';  ?></span>
             </div>
 
         </div>
@@ -132,7 +137,9 @@ $rs = $qry->fetch_array();
     </div>
 </form>
 
+<?php
 
+?>
 <!---Script-->
 <script>
     function updateDiv() {
