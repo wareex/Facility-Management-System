@@ -20,7 +20,7 @@
 
         </a>
         <div class="dropdown-menu">
-            <a class="dropdown-item manage_account" href="javascript:void(0)" data-id="<?php echo $_SESSION['login_UId'] ?>">Manage Account</a>
+            <a class="dropdown-item manage_account" href="javascript:void(0)" data-id="<?php echo $_SESSION['login_UId'] ?>">Set Profile Pics</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="ajax.php?action=logout">Logout</a>
         </div>
@@ -88,7 +88,7 @@
 
         }
         $('.manage_account').click(function() {
-            uni_modal('Manage Account', 'manage_user.php?id=' + $(this).attr('data-id'))
+            uni_modal('Set Your Profile Pictures Here', 'manage_user.php?id=' + $(this).attr('data-id'))
         })
     })
 </script>

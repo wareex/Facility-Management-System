@@ -89,6 +89,25 @@ class Action
 			}
 		}
 	}
+	function set_pics()
+	{
+		extract($_POST);
+		$data = " UId = '$UId' ";
+		$chk = $this->db->query("SELECT * FROM tenant_login where UId = '$_SESSION[login_UId]' ")->num_rows;
+		if ($chk > 0) {
+
+			if ($_FILES['img']['tmp_name'] != '') {
+				$fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['img']['name'];
+				$move = move_uploaded_file($_FILES['img']['tmp_name'], 'assets/uploads/' . $fname);
+				$data .= ", avatar = '$fname' ";
+			}
+			$save = $this->db->query("UPDATE tenants set " . $data);
+			if ($save) {
+				return 1;
+			}
+		}
+	}
+
 
 	function pay_bill()
 	{
@@ -103,10 +122,10 @@ class Action
 		$data .= ", UId = '$UId' ";
 		$data .= ", balance = '$balance' ";
 		$data .= ", amountpayable = '$amountpayable' ";
-		
+
 		if (empty($id)) {
 			$save = $this->db->query("INSERT INTO utility_bill set $data");
-		} 
+		}
 		if ($save)
 			return 1;
 	}

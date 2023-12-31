@@ -97,5 +97,9 @@ if ($action == "delete_reply") {
 	if ($save)
 		echo $save;
 }
-
+if ($action == 'set_pics') {
+	$save = $crud->set_pics();
+	if ($save)
+		echo $save;
+}
 ob_end_flush();
