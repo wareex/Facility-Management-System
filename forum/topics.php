@@ -19,6 +19,50 @@
 		.list-group-item+.list-group-item {
 			border-top-width: 1px !important;
 		}
+		#profile {
+			display: flex;
+			height: calc(100%);
+			width: calc(100%);
+			justify-content: center;
+			align-items: center
+		}
+
+		#pp {
+			max-width: calc(100%);
+			max-height: calc(100%);
+			border-radius: 100%;
+		}
+
+		.img {
+			width: 80px;
+			height: 85px;
+			align-self: center;
+			border-radius: 50%;
+			border: 3px solid #808080c2;
+			display: flex;
+			justify-content: center;
+			text-align: -webkit-auto;
+		}
+		#cheader{
+		height: calc(10%);
+		border-bottom: 3px solid #ecececab;
+		padding:1em .5em;
+	}
+	#cheader img{
+		max-width: calc(100%);
+		max-height:calc(100%);
+		    border-radius: 100%;
+	}
+		#cheader .uavatar {
+	    width: 50px;
+	    height: 50px;
+	    align-self: center;
+	    border-radius: 50%;
+	    border: 3px solid #808080c2;
+	    display: flex;
+	    justify-content: center;
+	    text-align: -webkit-auto;
+	}
 	</style>
 	<div class="col-lg-12">
 		<div class="row mb-4 mt-4">
@@ -46,7 +90,7 @@
 							while ($row = $tag->fetch_assoc()) :
 								$tags[$row['id']] = $row['name'];
 							endwhile;
-							$topic = $conn->query("SELECT t.*,tenants.firstname,tenants.house_id FROM topics t left join tenants on tenants.house_id = t.user_id order by unix_timestamp(date_created) desc");
+							$topic = $conn->query("SELECT t.*,tenants.firstname,tenants.house_id,tenant_login.avatar FROM topics t left join tenants on tenants.house_id = t.user_id left join tenant_login on tenant_login.UId = t.user_id order by unix_timestamp(date_created) desc");
 							while ($row = $topic->fetch_assoc()) :
 								$trans = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES);
 								unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -73,13 +117,18 @@
 										?>
 										<span class="float-right mr-4"><small><i>Created: <?php echo date('M d, Y h:i A', strtotime($row['date_created'])) ?></i></small></span>
 										<a href="index.php?page=../admin/view_forum&id=<?php echo $row['id'] ?>" class=" filter-text"><?php echo $row['title'] ?></a>
-
 									</div>
 									<hr>
 									<p class="truncate filter-text"><?php echo strip_tags($desc) ?></p>
-									<p class="row justify-content-left"><span class="badge badge-success text-white"><i>Posted By: <?php echo $row['firstname'] ?></i></span></p>
+									<div class="w-100" id="cheader">
+										<table class="" width="100%">
+											<tr>
+												<td width="10%"><div class="uavatar"><img src="../assets/uploads/<?php echo $row['avatar'] ?>" alt=""></div></td>
+												<td><p class="row justify-content-left"><span class="badge badge-success text-white"><i>Posted By: <?php echo $row['firstname'] ?> </i></span></p></td>
+											</tr>
+										</table>
+									</div>
 									<hr>
-
 									<span class="float-left badge badge-secondary text-white"><?php echo number_format($view) ?> view/s</span>
 									<span class="float-left badge badge-primary text-white ml-2"><i class="fa fa-comments"></i> <?php echo number_format($comments) ?> comment/s <?php echo $replies > 0 ? " and " . number_format($replies) . ' replies' : '' ?> </span>
 									<span class="float-right">

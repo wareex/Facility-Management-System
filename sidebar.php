@@ -1,14 +1,10 @@
 <?php $SessionId = $_SESSION['login_UId'];  ?>
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+<aside class="main-sidebar sidebar-dark-primary elevation-8">
     <div class="dropdown">
         <a href="javascript:void(0)" class="brand-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <?php if (empty($_SESSION['login_avatar'])) : ?>
                 <span class="brand-image img-circle elevation-3 d-flex justify-content-center align-items-center bg-primary text-white font-weight-500" style="width: 45px;height:60px"><?php echo $_SESSION['login_UId'] ?></span>
-            <?php else : ?>
-                <span class="image">
-                    <img src="../assets/uploads/<?php echo $_SESSION['login_avatar'] ?>" style="width: 38px;height:38px" class="img-circle elevation-2" alt="User Image">
-                </span>
-            <?php endif; ?>
+             
             <span class="brand-text font-weight-light"><?php
                                                         $wat =  $_SESSION['login_UId'];
 

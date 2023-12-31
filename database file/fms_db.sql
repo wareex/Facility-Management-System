@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2023 at 03:50 AM
+-- Generation Time: Dec 31, 2023 at 11:10 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -238,6 +238,7 @@ CREATE TABLE `tenant_login` (
   `id` int(255) NOT NULL,
   `UId` varchar(100) NOT NULL,
   `Password` varchar(255) NOT NULL,
+  `avatar` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -245,9 +246,9 @@ CREATE TABLE `tenant_login` (
 -- Dumping data for table `tenant_login`
 --
 
-INSERT INTO `tenant_login` (`id`, `UId`, `Password`, `date`) VALUES
-(1, '566', '827ccb0eea8a706c4c34a16891f84e7b', '2023-11-22 20:34:41'),
-(9, '765', '6531401f9a6807306651b87e44c05751', '2023-12-17 17:12:11');
+INSERT INTO `tenant_login` (`id`, `UId`, `Password`, `avatar`, `date`) VALUES
+(1, '566', '827ccb0eea8a706c4c34a16891f84e7b', '1704032940_OIP.jpeg', '2023-11-22 20:34:41'),
+(9, '765', '6531401f9a6807306651b87e44c05751', '1704033000_download (2).jpeg', '2023-12-17 17:12:11');
 
 -- --------------------------------------------------------
 

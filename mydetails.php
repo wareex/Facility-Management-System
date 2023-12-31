@@ -17,6 +17,10 @@ foreach ($tenants->fetch_array() as $k => $v) {
 		<div class="row">
 			<div class="col-md-24">
 				<div id="details">
+				<p> My Profile Picture: <br></p>
+				<div class="img">
+					<img src="assets/uploads/<?php echo $_SESSION['login_avatar'] ?>" id="pp" alt="UserImage">
+				</div>
 					<p>Tenant: <b><?php echo ucwords($name) ?></b></p>
 					<p>Tenant ID: <b><?php echo ($house_no) ?></b></p>
 					<p>Property Address: <b><?php echo ($house_no), " ", ($typez), " ", ($description) ?></b></p>
@@ -39,4 +43,28 @@ foreach ($tenants->fetch_array() as $k => $v) {
 				th {
 					padding: 3px !important;
 				}
+				#profile {
+			display: flex;
+			height: calc(100%);
+			width: calc(100%);
+			justify-content: center;
+			align-items: center
+		}
+
+		#pp {
+			max-width: calc(100%);
+			max-height: calc(100%);
+			border-radius: 100%;
+		}
+
+		.img {
+			width: 80px;
+			height: 85px;
+			align-self: center;
+			border-radius: 50%;
+			border: 3px solid #808080c2;
+			display: flex;
+			justify-content: center;
+			text-align: -webkit-auto;
+		}
 			</style>

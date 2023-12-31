@@ -2,11 +2,11 @@
 <?php
 
 if (isset($_GET['id'])) {
-	$qry = $conn->query("SELECT t.*,u.firstname FROM topics t inner join tenants u on u.house_id = t.user_id where t.id= " . $_GET['id']);
+	$qry = $conn->query("SELECT t.*,u.firstname,u.lastname,tenant_login.avatar FROM topics t left join tenants u on u.house_id = t.user_id left join tenant_login on tenant_login.UId = t.user_id where t.id= " . $_GET['id']);
 	foreach ($qry->fetch_array() as $k => $val) {
 		$$k = $val;
 	}
-	$comments = $conn->query("SELECT c.*,u.lastname,u.firstname FROM comments c inner join tenants u on u.house_id = c.user_id where c.topic_id= " . $_GET['id'] . " order by unix_timestamp(c.date_created) asc");
+	$comments = $conn->query("SELECT c.*,u.lastname,u.firstname,tenant_login.avatar FROM comments c inner join tenants u on u.house_id = c.user_id left join tenant_login on tenant_login.UId = c.user_id where c.topic_id= " . $_GET['id'] . " order by unix_timestamp(c.date_created) asc");
 	$com_arr = array();
 	while ($row = $comments->fetch_assoc()) {
 		$com_arr[] = $row;
@@ -63,6 +63,50 @@ if (isset($_GET['id'])) {
 		background: #80808091;
 		padding: 5px;
 	}
+	#profile {
+			display: flex;
+			height: calc(100%);
+			width: calc(100%);
+			justify-content: center;
+			align-items: center
+		}
+
+		#pp {
+			max-width: calc(100%);
+			max-height: calc(100%);
+			border-radius: 100%;
+		}
+
+		.img {
+			width: 80px;
+			height: 85px;
+			align-self: center;
+			border-radius: 50%;
+			border: 3px solid #808080c2;
+			display: flex;
+			justify-content: center;
+			text-align: -webkit-auto;
+		}
+		#cheader{
+		height: calc(10%);
+		border-bottom: 3px solid #ecececab;
+		padding:1em .5em;
+	}
+	#cheader img{
+		max-width: calc(100%);
+		max-height:calc(100%);
+		    border-radius: 100%;
+	}
+		#cheader .uavatar {
+	    width: 50px;
+	    height: 50px;
+	    align-self: center;
+	    border-radius: 50%;
+	    border: 3px solid #808080c2;
+	    display: flex;
+	    justify-content: center;
+	    text-align: -webkit-auto;
+	}
 </style>
 <div class="container-field">
 	<div class="col-lg-12">
@@ -83,8 +127,8 @@ if (isset($_GET['id'])) {
 				<?php endif;
 				?>
 				<span class="float-right mr-4"><small><i><?php echo date('M d, Y h:i A', strtotime($date_created)) ?></i></small></span>
-				<span class="float-right mr-4 text-primary"><small><i>Posted By: <?php echo ucwords($firstname) ?></i></small></span>
-				<div class="col-md-8">
+				<span class="float-right mr-4 text-primary"><small><i>Posted By: <?php echo ($firstname) ?></i></small></span>
+									<div class="col-md-8">
 					<h4><b><?php echo $title ?></b></h4>
 				</div>
 				<?php if (count($tags) > 0) : ?>
