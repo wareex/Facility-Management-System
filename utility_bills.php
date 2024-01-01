@@ -133,11 +133,11 @@
   <div class="card card-outline card-primary">
     <div class="card-header">
       <div class="card-tools">
-      <form action="./index.php?page=select_item" method="POST" id="billpage">
+        <form action="./index.php?page=select_item" method="POST" id="billpage">
           <input type="hidden" class="form-control form-control-sm" name="amountpayableIn" id="amountpayableIn" value="" readonly>
           <input type="hidden" class="form-control form-control-sm" name="completedMonths" id="completedMonths" value="" readonly>
           <button type="submit" class="btn btn-block btn-sm btn-default btn-flat border-success make_payment" name="billpage"> Make Payments <i class="fa fa-angle-double-right"> </i></button>
-                </form>
+        </form>
       </div>
     </div>
     <!-- Monthly Payement progress bar -->
@@ -306,7 +306,7 @@
                       <span class="progress-text">November</span>
                     </center>
                   </li>
-                  <li class="progress-todo"data-value="2500">
+                  <li class="progress-todo" data-value="2500">
                     <center>
                       <div class="icon-wrap">
                         <svg class="icon-state icon-check-mark">
@@ -384,81 +384,111 @@
       })
 
 
-     // Variable to hold indices of completed months
-  var completedMonths = [];
-  //var sumofcompletedMonths = calculateSum(completedMonths);
+      // Variable to hold indices of completed months
+      var completedMonths = [];
+      //var sumofcompletedMonths = calculateSum(completedMonths);
 
       function updateProgressBar() {
-    // Get the current date
-    var currentDate = new Date();
+        // Get the current date
+        var currentDate = new Date();
 
-    // Get the current month (0-based index)
-    var currentMonth = currentDate.getMonth(); // January is 0, February is 1, ..., December is 11
+        // Get the current month (0-based index)
+        var currentMonth = currentDate.getMonth(); // January is 0, February is 1, ..., December is 11
 
-    // Get all progress-todo elements
-    var todoItems = document.querySelectorAll('.progress-todo');
+        // Get all progress-todo elements
+        var todoItems = document.querySelectorAll('.progress-todo');
 
 
-    // Get the total value for the progress bar
-    var totalValue = parseInt(document.querySelector('.progress-track').getAttribute('data-total-months'));
+        // Get the total value for the progress bar
+        var totalValue = parseInt(document.querySelector('.progress-track').getAttribute('data-total-months'));
 
-    // Calculate the percentage completed
-    var percentageCompleted = (amountPayable / totalValue) * 100;
+        // Calculate the percentage completed
+        var percentageCompleted = (amountPayable / totalValue) * 100;
 
-    // Iterate through each progress-todo element and update the classes
-    todoItems.forEach(function(item, index) {
-      var monthValue = parseInt(item.getAttribute('data-value'));
+        // Iterate through each progress-todo element and update the classes
+        todoItems.forEach(function(item, index) {
+          var monthValue = parseInt(item.getAttribute('data-value'));
 
-      // Calculate the percentage for the current month
-      var percentageMonth = (monthValue / totalValue) * 100;
+          // Calculate the percentage for the current month
+          var percentageMonth = (monthValue / totalValue) * 100;
 
-      // Add the index of the completed month to the array
-      if (!completedMonths.includes(index)) {
-        completedMonths.push(index);
+          // Add the index of the completed month to the array
+          if (!completedMonths.includes(index)) {
+            completedMonths.push(index);
+          }
+
+
+          // Add progress-done class to completed months
+          if (completedMonths.includes(index)) {
+            item.classList.remove('progress-todo');
+            item.classList.add('progress-done');
+
+            // If it's December, reset the progress for January
+            if (index === 11) {
+              todoItems[0].classList.remove('progress-todo');
+              todoItems[0].classList.add('progress-done');
+
+              todoItems[1].classList.remove('progress-done');
+              todoItems[1].classList.add('progress-todo');
+              todoItems[2].classList.remove('progress-done');
+              todoItems[2].classList.add('progress-todo');
+              todoItems[3].classList.remove('progress-done');
+              todoItems[3].classList.add('progress-todo');
+              todoItems[4].classList.remove('progress-done');
+              todoItems[4].classList.add('progress-todo');
+              todoItems[5].classList.remove('progress-done');
+              todoItems[5].classList.add('progress-todo');
+              todoItems[6].classList.remove('progress-done');
+              todoItems[6].classList.add('progress-todo');
+              todoItems[7].classList.remove('progress-done');
+              todoItems[7].classList.add('progress-todo');
+              todoItems[8].classList.remove('progress-done');
+              todoItems[8].classList.add('progress-todo');
+              todoItems[9].classList.remove('progress-done');
+              todoItems[9].classList.add('progress-todo');
+              todoItems[10].classList.remove('progress-done');
+              todoItems[10].classList.add('progress-todo');
+              todoItems[11].classList.remove('progress-done');
+              todoItems[11].classList.add('progress-todo');
+            }
+
+          }
+
+          // Add progress-current class to the current month
+          else if (index === currentMonth + 1) {
+            item.classList.remove('progress-todo', 'progress-done');
+            item.classList.add('progress-current');
+
+          }
+          // Add progress-todo class to future months
+          else {
+            item.classList.remove('progress-done', 'progress-current');
+            item.classList.add('progress-todo');
+          }
+
+        });
+
+        //Sum of fugding monthsss
+        var sumofcompletedMonths = completedMonths.length;
+
+        document.getElementById('completedMonths').value = sumofcompletedMonths;
+
+        // Sum up the values of completed months
+        var amountPayable = 0;
+        document.querySelectorAll('.progress-done').forEach(function(item) {
+          amountPayable += parseInt(item.getAttribute('data-value'));
+        });
+
+        // Display the amountPayable in the input box
+        document.getElementById('amountpayableIn').value = amountPayable;
       }
-    
-      
-      // Add progress-done class to completed months
-      if (completedMonths.includes(index)) {
-        item.classList.remove('progress-todo');
-        item.classList.add('progress-done');
-      }
-      // Add progress-current class to the current month
-      else if (index === currentMonth + 1) {
-        item.classList.remove('progress-todo', 'progress-done');
-        item.classList.add('progress-current');
-      }
-      // Add progress-todo class to future months
-      else {
-        item.classList.remove('progress-done', 'progress-current');
-        item.classList.add('progress-todo');
-      }
-      
-    });
-    
-    //Sum of fugding monthsss
-    var sumofcompletedMonths = completedMonths.length;
-
-    document.getElementById('completedMonths').value = sumofcompletedMonths;
-
-     // Sum up the values of completed months
-     var amountPayable = 0;
-    document.querySelectorAll('.progress-done').forEach(function(item) {
-      amountPayable += parseInt(item.getAttribute('data-value'));
-    });
-
-    // Display the amountPayable in the input box
-    document.getElementById('amountpayableIn').value = amountPayable;
-  }
 
 
-  // Call the updateProgressBar function when the page is loaded
-  $(document).ready(function() {
-    updateProgressBar();
-  });
+      // Call the updateProgressBar function when the page is loaded
+      $(document).ready(function() {
+        updateProgressBar();
+      });
 
-  // A button that triggers a month change, you can do:
-  // $('#changeMonthButton').on('click', updateProgressBar);
-     
-  
-</script>
+      // A button that triggers a month change, you can do:
+      // $('#changeMonthButton').on('click', updateProgressBar);
+    </script>
