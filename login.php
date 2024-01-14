@@ -82,7 +82,7 @@ ob_end_flush();
         </div>
     </main>
     <footer class="footer" style="text-align: center;">
-        <strong>Copyright &copy; 2023 <a href="#">FACILITY MANAGEMENT SYSTEM. By Mardiya Bello</a>.</strong>
+        <strong>Copyright &copy; 2023 <a href="#">FACILITY MANAGEMENT SYSTEM. By Wareez Busari</a>.</strong>
         All rights reserved.
     </footer>
 </body>
